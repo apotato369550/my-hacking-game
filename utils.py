@@ -3,13 +3,13 @@
 import pygame
 import sys
 from settings import FONT_COLOR, INPUT_COLOR
-from node import Node, scan, hack
+from node import scan, hack
 
 def draw_text(surface, text, pos, font, color=FONT_COLOR):
     text_surface = font.render(text, True, color)
     surface.blit(text_surface, pos)
 
-def handle_input(event, input_text, state, player, nodes, output_lines):
+def handle_input(event, input_text, state, player, nodes, output_lines, screen, clock):
     if event.key == pygame.K_RETURN:
         output_lines.append("> " + input_text)
         if state == "normal":
@@ -46,7 +46,7 @@ def handle_input(event, input_text, state, player, nodes, output_lines):
         elif state == "hack":
             choice = int(input_text) - 1
             if 0 <= choice < len(nodes):
-                hack(player, nodes[choice], output_lines)
+                hack(player, nodes[choice], output_lines, screen, clock)
             else:
                 output_lines.append("Invalid node.")
             state = "normal"

@@ -43,7 +43,7 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
             elif event.type == pygame.KEYDOWN:
-                input_text, state = handle_input(event, input_text, state, player, nodes, output_lines)
+                input_text, state = handle_input(event, input_text, state, player, nodes, output_lines, screen, clock)
         
         # Render output lines
         y_offset = 10
