@@ -3,7 +3,7 @@
 import pygame
 import sys
 from settings import FONT_COLOR, INPUT_COLOR
-from node import scan, hack
+from node import scan, hack, perform_hack
 
 def draw_text(surface, text, pos, font, color=FONT_COLOR):
     text_surface = font.render(text, True, color)
@@ -47,8 +47,18 @@ def handle_input(event, input_text, state, player, nodes, output_lines, screen, 
             choice = int(input_text) - 1
             if 0 <= choice < len(nodes):
                 hack(player, nodes[choice], output_lines, screen, clock)
+                state = f"hack_{choice}"
             else:
                 output_lines.append("Invalid node.")
+                state = "normal"
+        elif state.startswith("hack_"):
+            choice = int(state.split("_")[1])
+            node = nodes[choice]
+            method = input_text.lower()
+            if method in ["bypass", "crack", "decrypt"]:
+                perform_hack(player, node, output_lines, screen, clock, method)
+            else:
+                output_lines.append("Invalid method.")
             state = "normal"
         elif state == "upgrade":
             if input_text == "1":
