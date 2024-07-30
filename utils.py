@@ -16,18 +16,18 @@ def handle_input(event, input_text, state, player, nodes, output_lines, screen, 
             if input_text == "scan":
                 output_lines.append("Choose a node to scan:")
                 for i, node in enumerate(nodes):
-                    output_lines.append(f"{i + 1}. {node.name}")
+                    output_lines.append(f"[{i + 1}] {node.name}")
                 state = "scan"
             elif input_text == "hack":
                 output_lines.append("Choose a node to hack:")
                 for i, node in enumerate(nodes):
-                    output_lines.append(f"{i + 1}. {node.name}")
+                    output_lines.append(f"[{i + 1}] {node.name}")
                 state = "hack"
             elif input_text == "upgrade":
                 output_lines.append("Choose a tool to upgrade:")
-                output_lines.append("1. Password Cracker")
-                output_lines.append("2. Firewall Disabler")
-                output_lines.append("3. Encryption Breaker")
+                output_lines.append("[1] Password Cracker")
+                output_lines.append("[2] Firewall Disabler")
+                output_lines.append("[3] Encryption Breaker")
                 state = "upgrade"
             elif input_text == "help":
                 show_help(output_lines)
